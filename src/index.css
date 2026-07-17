@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-cream-100 text-royal-900 font-sans antialiased selection:bg-gold-500 selection:text-royal-950;
+  }
+}
+
+/* Custom Masonry Column Layout Utilities */
+.masonry-grid-2 {
+  column-count: 1;
+  column-gap: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .masonry-grid-2 {
+    column-count: 2;
+  }
+}
+
+.masonry-grid-3 {
+  column-count: 1;
+  column-gap: 1.75rem;
+}
+
+@media (min-width: 640px) {
+  .masonry-grid-3 {
+    column-count: 2;
+  }
+}
+
+@media (min-width: 1024px) {
+  .masonry-grid-3 {
+    column-count: 3;
+  }
+}
+
+.masonry-item {
+  break-inside: avoid;
+  margin-bottom: 1.75rem;
+}
+
+/* Custom Glassmorphism Header */
+.glass-navbar {
+  background: rgba(253, 252, 249, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+/* Spiritual/Ashram Background Textures */
+.bg-paper-grain {
+  background-color: #FDFCF9;
+  background-image: 
+    radial-gradient(rgba(196, 145, 92, 0.08) 1px, transparent 0),
+    radial-gradient(rgba(30, 58, 138, 0.03) 1px, transparent 0);
+  background-size: 28px 28px;
+  background-position: 0 0, 14px 14px;
+}
+
+.bg-dawn-gradient {
+  background: radial-gradient(circle at 85% 15%, rgba(245, 197, 24, 0.10) 0%, transparent 45%),
+              radial-gradient(circle at 10% 85%, rgba(196, 145, 92, 0.14) 0%, transparent 55%),
+              linear-gradient(180deg, #FDFCF9 0%, #FAF6EF 100%);
+}
+
+.bg-dusk-gradient {
+  background: radial-gradient(circle at 90% 10%, rgba(196, 145, 92, 0.15) 0%, transparent 50%),
+              radial-gradient(circle at 20% 80%, rgba(245, 197, 24, 0.08) 0%, transparent 50%),
+              linear-gradient(180deg, #11204C 0%, #0B1533 100%);
+}

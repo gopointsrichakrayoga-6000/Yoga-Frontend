@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, Link, useLocation } from 'react-router-dom';
-import { Menu, X, Camera, Film, MapPin, ShieldAlert, LogIn, LogOut, User as UserIcon } from 'lucide-react';
+import { Menu, X, Camera, Film, MapPin, ShieldAlert, LogIn, LogOut, User as UserIcon, Heart } from 'lucide-react';
 import { AshramLogo } from '../common/AshramLogo';
 import { useAuth } from '../../context/AuthContext';
+import OfferingModal from '../offerings/OfferingModal';
 
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isOfferingModalOpen, setIsOfferingModalOpen] = useState(false);
   const { user, isAuthenticated, isAdmin, logout } = useAuth();
   const location = useLocation();
 
@@ -64,7 +66,16 @@ export const Navbar = () => {
             </div>
 
             {/* Right Area: Sign In text link + Solid Dark Pill CTA */}
-            <div className="hidden lg:flex items-center space-x-6">
+            <div className="hidden lg:flex items-center space-x-5">
+              <button
+                type="button"
+                onClick={() => setIsOfferingModalOpen(true)}
+                className="flex items-center space-x-1.5 px-4 py-2 rounded-full border border-amber-600/40 bg-amber-500/10 hover:bg-amber-500/20 text-amber-800 text-xs font-semibold tracking-wide transition-all shadow-sm"
+              >
+                <Heart className="w-3.5 h-3.5 text-amber-600 fill-amber-500/20" />
+                <span>Offer Dakshina</span>
+              </button>
+
               {isAuthenticated ? (
                 <>
                   <div className="flex items-center space-x-2 text-xs text-royal-900/80 font-medium">
@@ -109,6 +120,14 @@ export const Navbar = () => {
 
             {/* Mobile Menu Toggle */}
             <div className="flex lg:hidden items-center space-x-2">
+              <button
+                type="button"
+                onClick={() => setIsOfferingModalOpen(true)}
+                className="px-3 py-1.5 rounded-full border border-amber-600/40 bg-amber-500/10 text-amber-800 text-xs font-semibold flex items-center space-x-1"
+              >
+                <Heart className="w-3 h-3 text-amber-600 fill-amber-500/20" />
+                <span>Dakshina</span>
+              </button>
               {isAuthenticated && isAdmin && (
                 <Link
                   to="/admin"
@@ -120,7 +139,7 @@ export const Navbar = () => {
               <button
                 type="button"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="p-2.5 rounded-full text-royal-900 hover:bg-royal-800/10 transition-colors focus:outline-none"
+                className="p-2.5 rounded-full text-royal-900 hover:bg-terracotta-500/10 focus:outline-none transition-colors"
                 aria-label="Toggle Navigation Menu"
               >
                 {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -168,6 +187,17 @@ export const Navbar = () => {
             </div>
 
             <div className="pt-6 border-t border-royal-800/10 space-y-3">
+              <button
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  setIsOfferingModalOpen(true);
+                }}
+                className="w-full py-3 rounded-full border border-amber-600/50 bg-amber-500/15 text-amber-900 font-semibold text-center flex items-center justify-center space-x-2 shadow-sm"
+              >
+                <Heart className="w-4 h-4 text-amber-700 fill-amber-500/20" />
+                <span>Offer Dakshina & Seva</span>
+              </button>
+
               {isAuthenticated ? (
                 <div>
                   <div className="flex items-center justify-between px-4 py-3 rounded-xl bg-cream-200/80 mb-3 text-xs">
@@ -214,6 +244,11 @@ export const Navbar = () => {
           </div>
         </div>
       )}
+
+      <OfferingModal
+        isOpen={isOfferingModalOpen}
+        onClose={() => setIsOfferingModalOpen(false)}
+      />
     </>
   );
 };
